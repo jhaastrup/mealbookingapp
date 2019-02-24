@@ -47,6 +47,51 @@ class AuthController {
         });
       });
   }
+
+  static login(req, res) {
+    const { email, password } = req.body;
+    User.findOne({
+      where: {
+        email
+      },
+    })
+      .then((response) => {
+        if (!response) {
+          return res.status(400).json({
+            statusText: 'Bad Request',
+            status: 400,
+            message: 'Your credentials are incorrect'
+          });
+        }
+        const { dataValues } = response;
+        const userPassword = dataValues.password;
+
+        if (!PasswordHash.compare(password, userPassword)) {
+          res.status(400).json({
+            statusText: 'Bad Request',
+            status: 400,
+            message: 'Your credentials are incorrect'
+          });
+        } else {
+          const user = {
+            id: dataValues.id,
+            username: dataValues.username,
+            fullName: dataValues.fullName,
+            email: dataValues.email,
+          };
+          const token = Token.generateToken(user, '365d');
+          res.status(200).json({
+            statusText: 'Ok',
+            status: 200,
+            message: 'Logged in successfully',
+            data: {
+              token,
+              user,
+            }
+          });
+        }
+      });
+  }
 }
 
 export default AuthController;
