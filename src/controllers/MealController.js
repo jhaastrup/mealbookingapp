@@ -24,12 +24,21 @@ class MealController {
           status: 201,
           message: 'Meal created successfully',
         });
-      })
-      .catch(() => {
-        res.status(500).send({
-          statusText: 'Internal server error',
-          status: 500,
-          message: 'A server error occured'
+      });
+  }
+
+  static getAllMeals(req, res) {
+    Meal.findAll({
+      attributes: {
+        exclude: ['createdAt', 'updatedAt']
+      }
+    })
+      .then((response) => {
+        res.status(200).send({
+          statusText: 'Ok',
+          status: 200,
+          message: 'Returned all meals',
+          data: response,
         });
       });
   }

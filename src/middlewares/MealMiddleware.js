@@ -1,7 +1,5 @@
 class MealMiddleware {
   static validateCreateMeal(req, res, next) {
-    const user = req.authUser;
-    const userType = 'admin' || 'caterer';
     const {
       name,
       price,
@@ -28,14 +26,6 @@ class MealMiddleware {
         statusText: 'Bad Request',
         status: 400,
         message: 'Quantity cannot be empty',
-      };
-    }
-
-    if (user.userType !== userType) {
-      errors = {
-        statusText: 'Unauthorized',
-        status: 401,
-        message: 'Only admins and caterers can create meals',
       };
     }
 

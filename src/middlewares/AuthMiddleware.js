@@ -100,6 +100,20 @@ class AuthMiddleware {
 
     next();
   }
+
+  static validateAdmin(req, res, next) {
+    const user = req.authUser;
+    const userType = 'admin' || 'caterer';
+    if (user.userType !== userType) {
+      return res.status(401).send({
+        statusText: 'Unauthorized',
+        status: 401,
+        message: 'Only admins and caterers can create meals',
+      });
+    }
+
+    next();
+  }
 }
 
 export default AuthMiddleware;
