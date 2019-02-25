@@ -20,6 +20,7 @@ class AuthController {
       username,
       email,
       password: hashPassword,
+      userType: 'user',
     })
       .then((response) => {
         const { dataValues } = response;
@@ -28,6 +29,7 @@ class AuthController {
           username: dataValues.username,
           fullName: dataValues.fullName,
           email: dataValues.email,
+          userType: dataValues.userType,
         };
         const token = Token.generateToken(payload, '365d');
         res.status(201).json({
@@ -78,6 +80,7 @@ class AuthController {
             username: dataValues.username,
             fullName: dataValues.fullName,
             email: dataValues.email,
+            userType: dataValues.userType,
           };
           const token = Token.generateToken(user, '365d');
           res.status(200).json({
