@@ -5,9 +5,12 @@
   "main": "./src/index.js",
   "scripts": {
     "start": "babel-node ./src/index.js",
-    "start:dev": "nodemon --exec babel-node ./src/index.js",
+    "start:dev": "npm run pretest && nodemon --exec babel-node ./src/index.js",
+    "pretest": "npm run unmigrate && npm run migrate && npm run seed",
     "migrate": "sequelize db:migrate",
     "unmigrate": "sequelize db:migrate:undo:all",
+    "seed": "sequelize db:seed:all",
+    "unseed": "sequelize db:seed:undo:all",
     "test": "nyc mocha --exit --timeout 100000 --require @babel/register ./test/*",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
