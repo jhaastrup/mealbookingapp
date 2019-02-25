@@ -23,7 +23,7 @@ module.exports = {
     username: DB_USER,
     password: DB_PASSWORD,
     database: DB_NAME_TEST,
-    host: '127.0.0.1',
+    host: 'localhost',
     dialect: 'postgres'
   }
 };
