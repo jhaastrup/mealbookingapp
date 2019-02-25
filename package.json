@@ -4,7 +4,7 @@
   "description": "ALCwithforloop Meal Booking App",
   "main": "./src/index.js",
   "scripts": {
-    "start": "babel-node ./src/index.js",
+    "start": "npm run pretest && babel-node ./src/index.js",
     "start:dev": "npm run pretest && nodemon --exec babel-node ./src/index.js",
     "pretest": "npm run unmigrate && npm run migrate && npm run seed",
     "migrate": "sequelize db:migrate",

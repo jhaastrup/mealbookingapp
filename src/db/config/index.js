@@ -22,7 +22,7 @@ module.exports = {
   production: {
     username: DB_USER,
     password: DB_PASSWORD,
-    database: DB_NAME_TEST,
+    database: DB_NAME,
     host: DB_HOST,
     dialect: 'postgres'
   }
