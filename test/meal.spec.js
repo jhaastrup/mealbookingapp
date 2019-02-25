@@ -98,4 +98,17 @@ describe('Meal Endpoints', () => {
         });
     });
   });
+  describe('GET /', () => {
+    it('should get all meals', (done) => {
+      chai.request(app)
+        .get(`${route}meals`)
+        .set('x-access-token', adminToken)
+        .end((err, res) => {
+          expect(res.body.message).eql('Returned all meals');
+          expect(res.status).to.equal(200);
+          expect(res.body.statusText).eql('Ok');
+          done();
+        });
+    });
+  });
 });
